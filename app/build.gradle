@@ -1,37 +1,20 @@
-plugins {
-    id 'com.android.application'
-}
-
+plugins { id 'com.android.application' }
 android {
-    namespace 'com.primx.ui.terminal'
-    compileSdkVersion 33
-
+    namespace 'com.termux'
+    compileSdk 34
     defaultConfig {
-        applicationId "com.primx.ui.terminal"
-        minSdkVersion 21
-        targetSdkVersion 28
+        applicationId "com.termux"
+        minSdk 24
+        targetSdk 34
         versionCode 1
         versionName "1.0"
+        externalNativeBuild { cmake { cppFlags "" } }
     }
-
-    sourceSets {
-        main {
-            jniLibs.srcDirs = ['src/main/jniLibs']
-        }
-    }
-
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
 }
-
-dependencies {
-}
+dependencies {}
