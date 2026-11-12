@@ -1,2 +1,2 @@
 include ':app'
-rootProject.name = "Turmux open"
+rootProject.name = "SuperTerminal"
