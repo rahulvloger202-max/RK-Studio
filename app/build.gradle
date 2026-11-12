@@ -9,15 +9,15 @@ android {
     defaultConfig {
         applicationId "com.primx.ui.terminal"
         minSdkVersion 21
-        targetSdkVersion 33
+        targetSdkVersion 28
         versionCode 1
         versionName "1.0"
+    }
 
-        // C++ ke liye zaroori config
-        externalNativeBuild {
-            cmake {
-                cppFlags ""
-            }
+    // YEH BLOCK ZAROORI HAI: Isse compiler ko pata chalega ki .so file kahan rakhi hai
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['src/main/jniLibs']
         }
     }
 
@@ -28,14 +28,6 @@ android {
         }
     }
 
-    // CMake ka rasta
-    externalNativeBuild {
-        cmake {
-            path "src/main/cpp/CMakeLists.txt"
-            version "3.10.2"
-        }
-    }
-
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -43,5 +35,5 @@ android {
 }
 
 dependencies {
-    // Agar future mein koi dependency chahiye toh yahan aayegi
+    // Agar koi dependency ho toh yahan aayegi
 }
