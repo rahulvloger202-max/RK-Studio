@@ -2,6 +2,9 @@ package com.primx.ui.terminal;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.widget.Toast;
 
 public class MainActivity extends Activity {
     private TermuxEngine engine;
@@ -11,22 +14,25 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // Native library load karo sabse pehle
-        TerminalPty.initNative(this);
-
-        // Screen lagao
+        // UI Load hone do pehle
         termuxView = new TermuxView(this);
         setContentView(termuxView);
 
-        // Engine chalu karo
-        engine = new TermuxEngine(new TermuxEngine.EngineListener() {
-            @Override
-            public void onOutput(String text) {
-                termuxView.appendOutput(text);
+        // Native load and start in background to prevent ANR/Crash
+        new Handler(Looper.getMainLooper()).postDelayed(() -> {
+            boolean isNativeReady = TerminalPty.initNative(MainActivity.this);
+            
+            if (!isNativeReady) {
+                termuxView.appendOutput("\n[CRITICAL ERROR] Native Library (libprimx_pty.so) load nahi hui!\n");
+                Toast.makeText(this, "Native Lib Missing!", Toast.LENGTH_LONG).show();
+                return;
             }
-        });
 
-        termuxView.attachEngine(engine);
-        engine.startNativeShell(getFilesDir().getAbsolutePath());
+            engine = new TermuxEngine(text -> termuxView.appendOutput(text));
+            termuxView.attachEngine(engine);
+            
+            // Start the shell from current internal directory
+            engine.startNativeShell(getFilesDir().getAbsolutePath());
+        }, 500); // Half second delay for smooth UI load
     }
 }
