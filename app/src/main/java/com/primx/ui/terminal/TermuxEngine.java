@@ -26,7 +26,11 @@ public class TermuxEngine {
         if (isRunning) return;
         new Thread(() -> {
             try {
-                String[] env = {"TERM=xterm-256color", "HOME=" + workingDir, "PATH=/system/bin:/system/xbin"};
+                String[] env = {
+                    "TERM=xterm-256color", 
+                    "HOME=" + workingDir, 
+                    "PATH=/system/bin:/system/xbin:/vendor/bin"
+                };
                 int[] pidArray = new int[1];
                 
                 ptyFd = TerminalPty.createSubprocess("/system/bin/sh", workingDir, new String[]{"-l"}, env, pidArray, 24, 80);
@@ -38,10 +42,10 @@ public class TermuxEngine {
                     isRunning = true;
                     readLoop();
                 } else {
-                    mainHandler.post(() -> listener.onOutput("\n[ERROR] Asli shell chalu nahi hua. .so file check karo.\n"));
+                    mainHandler.post(() -> listener.onOutput("\n[ERROR] Shell process start nahi hua (fd <= 0)\n"));
                 }
             } catch (Exception e) {
-                mainHandler.post(() -> listener.onOutput("\n[CRASH PREVENTED] " + e.getMessage() + "\n"));
+                mainHandler.post(() -> listener.onOutput("\n[CRASH PREVENTED] Shell Error: " + e.getMessage() + "\n"));
             }
         }).start();
     }
@@ -51,12 +55,17 @@ public class TermuxEngine {
             byte[] buffer = new byte[4096];
             int read;
             try {
-                while (isRunning && (read = ptyIn.read(buffer)) != -1) {
-                    String text = new String(buffer, 0, read, "UTF-8");
-                    mainHandler.post(() -> listener.onOutput(text));
+                // Thread safety and EOF handling
+                while (isRunning && ptyIn != null && (read = ptyIn.read(buffer)) != -1) {
+                    if (read > 0) {
+                        String text = new String(buffer, 0, read, "UTF-8");
+                        mainHandler.post(() -> listener.onOutput(text));
+                    }
                 }
             } catch (Exception e) {
-                mainHandler.post(() -> listener.onOutput("\n[STREAM BROKEN]\n"));
+                if (isRunning) {
+                    mainHandler.post(() -> listener.onOutput("\n[STREAM BROKEN]\n"));
+                }
             }
         }).start();
     }
@@ -67,7 +76,9 @@ public class TermuxEngine {
             try {
                 ptyOut.write((cmd + "\n").getBytes("UTF-8"));
                 ptyOut.flush();
-            } catch (Exception ignored) {}
+            } catch (Exception e) {
+                mainHandler.post(() -> listener.onOutput("\n[INPUT ERROR] " + e.getMessage() + "\n"));
+            }
         }).start();
     }
 }
