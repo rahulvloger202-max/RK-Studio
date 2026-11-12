@@ -1,4 +1,4 @@
-name: Build Android APK
+name: Build Super Terminal APK
 
 on:
   workflow_dispatch:
@@ -20,18 +20,17 @@ jobs:
 
       - name: Generate Gradle Wrapper
         run: |
-          echo "Generating Gradle Wrapper 8.4 to match AGP 8.1.0..."
+          echo "Generating Gradle Wrapper 8.4..."
           gradle wrapper --gradle-version 8.4
 
       - name: Build Debug APK
         run: |
-          echo "Building APK using the new wrapper..."
+          echo "Building APK..."
           chmod +x ./gradlew
           ./gradlew assembleDebug --stacktrace
-          echo "APK Build Complete!"
 
       - name: Upload APK Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: PrimX-Compiled-APK
+          name: SuperTerminal-APK
           path: app/build/outputs/apk/debug/*.apk
