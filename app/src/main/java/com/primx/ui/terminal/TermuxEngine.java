@@ -4,6 +4,9 @@ import android.os.Handler;
 import android.os.Looper;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.FileDescriptor;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 
 public class TermuxEngine {
     public interface EngineListener {
@@ -33,16 +36,24 @@ public class TermuxEngine {
                 };
                 int[] pidArray = new int[1];
                 
-                ptyFd = TerminalPty.createSubprocess("/system/bin/sh", workingDir, new String[]{"-l"}, env, pidArray, 24, 80);
-                shellPid = pidArray[0];
+                // Naya Pure C++ Call: Sirf cmd, args, envVars aur pidArray lega
+                FileDescriptor fdObj = TerminalPty.createSubprocess("/system/bin/sh", new String[]{"-l"}, env, pidArray);
 
-                if (ptyFd > 0) {
-                    ptyIn = TerminalPty.openInputStream(ptyFd);
-                    ptyOut = TerminalPty.openOutputStream(ptyFd);
+                if (fdObj != null) {
+                    shellPid = pidArray[0];
+                    ptyFd = TerminalPty.getFd(fdObj);
+                    
+                    // Naya Size set karna
+                    TerminalPty.setPtyWindowSize(fdObj, 24, 80);
+                    
+                    // Input/Output seedha java stream se handle
+                    ptyIn = new FileInputStream(fdObj);
+                    ptyOut = new FileOutputStream(fdObj);
+                    
                     isRunning = true;
                     readLoop();
                 } else {
-                    mainHandler.post(() -> listener.onOutput("\n[ERROR] Shell process start nahi hua (fd <= 0)\n"));
+                    mainHandler.post(() -> listener.onOutput("\n[ERROR] Shell process start nahi hua (fdObj null)\n"));
                 }
             } catch (Exception e) {
                 mainHandler.post(() -> listener.onOutput("\n[CRASH PREVENTED] Shell Error: " + e.getMessage() + "\n"));
