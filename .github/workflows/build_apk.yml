@@ -18,15 +18,16 @@ jobs:
           distribution: 'zulu'
           java-version: '17'
 
-      - name: Force Compatible Gradle Version
-        uses: gradle/actions/setup-gradle@v3
-        with:
-          gradle-version: '8.4'
+      - name: Generate Gradle Wrapper
+        run: |
+          echo "Generating Gradle Wrapper 8.4 to match AGP 8.1.0..."
+          gradle wrapper --gradle-version 8.4
 
       - name: Build Debug APK
         run: |
-          echo "Starting Gradle Build for APK..."
-          gradle assembleDebug --stacktrace
+          echo "Building APK using the new wrapper..."
+          chmod +x ./gradlew
+          ./gradlew assembleDebug --stacktrace
           echo "APK Build Complete!"
 
       - name: Upload APK Artifact
