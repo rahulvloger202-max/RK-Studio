@@ -14,7 +14,6 @@ android {
         versionName "1.0"
     }
 
-    // YEH BLOCK ZAROORI HAI: Isse compiler ko pata chalega ki .so file kahan rakhi hai
     sourceSets {
         main {
             jniLibs.srcDirs = ['src/main/jniLibs']
@@ -35,5 +34,4 @@ android {
 }
 
 dependencies {
-    // Agar koi dependency ho toh yahan aayegi
 }
