@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<!-- Minimal Default Theme for Blank Projects -->
+<style name="Theme.AppCompat" parent="@android:style/Theme.Material"/>
+<style name="Theme.MaterialComponents" parent="@android:style/Theme.Material"/>
+<attr name="colorPrimary" format="color"/>
+<attr name="colorPrimaryDark" format="color"/>
+<attr name="colorAccent" format="color"/>
+</resources>
