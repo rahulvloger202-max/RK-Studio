@@ -18,16 +18,9 @@ public class MainActivity extends Activity {
         termuxView = new TermuxView(this);
         setContentView(termuxView);
 
-        // Native load and start in background to prevent ANR/Crash
+        // Native engine ab apne aap JNI block mein load hota hai (TerminalPty.java mein)
         new Handler(Looper.getMainLooper()).postDelayed(() -> {
-            boolean isNativeReady = TerminalPty.initNative(MainActivity.this);
             
-            if (!isNativeReady) {
-                termuxView.appendOutput("\n[CRITICAL ERROR] Native Library (libprimx_pty.so) load nahi hui!\n");
-                Toast.makeText(this, "Native Lib Missing!", Toast.LENGTH_LONG).show();
-                return;
-            }
-
             engine = new TermuxEngine(text -> termuxView.appendOutput(text));
             termuxView.attachEngine(engine);
             
