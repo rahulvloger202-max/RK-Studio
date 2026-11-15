@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@drawable/bg_whit_blac_strok_corner"
+    android:padding="24dp">
+
+    <!-- Title and Icon -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginBottom="24dp">
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_settings"
+            android:tint="#61AFEF"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="AI Settings"
+            android:textColor="?attr/ide_text_primary"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_marginStart="8dp"/>
+    </LinearLayout>
+
+    <!-- API URL Box (Pill Shape) -->
+    <EditText
+        android:id="@+id/inputApiUrl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="API Base URL..."
+        android:textColor="?attr/ide_text_primary"
+        android:textColorHint="?attr/ide_text_secondary"
+        android:textSize="14sp"
+        android:background="@drawable/bg_whit_blac_strok_pill"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:paddingTop="12dp"
+        android:paddingBottom="12dp"
+        android:layout_marginBottom="16dp"
+        android:singleLine="true"/>
+
+    <!-- API Key Box (Pill Shape) -->
+    <EditText
+        android:id="@+id/inputApiKey"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="API Key..."
+        android:textColor="?attr/ide_text_primary"
+        android:textColorHint="?attr/ide_text_secondary"
+        android:textSize="14sp"
+        android:background="@drawable/bg_whit_blac_strok_pill"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:paddingTop="12dp"
+        android:paddingBottom="12dp"
+        android:layout_marginBottom="16dp"
+        android:singleLine="true"/>
+
+    <!-- Model Name Box (Pill Shape) -->
+    <EditText
+        android:id="@+id/inputAiModel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Model (e.g. gemini-1.5-pro-latest)"
+        android:textColor="?attr/ide_text_primary"
+        android:textColorHint="?attr/ide_text_secondary"
+        android:textSize="14sp"
+        android:background="@drawable/bg_whit_blac_strok_pill"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:paddingTop="12dp"
+        android:paddingBottom="12dp"
+        android:layout_marginBottom="24dp"
+        android:singleLine="true"/>
+
+    <!-- Save Button -->
+    <TextView
+        android:id="@+id/btnSaveAiSettings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="SAVE"
+        android:textColor="#00E676"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        android:layout_gravity="end"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:background="?android:attr/selectableItemBackground"
+        android:clickable="true"/>
+</LinearLayout>
+
