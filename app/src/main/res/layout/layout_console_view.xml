@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- ================= HEADER ================= -->
+    <LinearLayout
+        android:id="@+id/statusHeader"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:paddingStart="15dp"
+        android:paddingEnd="15dp"
+        android:paddingTop="12dp"
+        android:paddingBottom="12dp"
+        android:background="@drawable/bg_whit_blac_theme">
+
+        <FrameLayout
+            android:id="@+id/statusIconContainer"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginEnd="12dp"/>
+
+        <!-- 🔥 PrimX Console (Fixed width weight so it never cuts) -->
+        <TextView
+            android:id="@+id/tvConsoleTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="PRIMX CONSOLE"
+            android:textColor="#FF4081"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:singleLine="true"
+            android:ellipsize="none"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            android:paddingTop="6dp"
+            android:paddingBottom="6dp"/>
+
+        <!-- Spacer to push the status text and AI button to the right -->
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1" />
+
+        <!-- Status (Java updates text) -->
+        <TextView
+            android:id="@+id/tvStatusText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="No Errors"
+            android:textColor="?attr/ide_text_primary"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:layout_marginEnd="10dp"/>
+
+        <!-- AI Fix (bg_pill_blue वैसा ही) -->
+        <TextView
+            android:id="@+id/btnAiFix"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="❇️ AI"
+            android:textColor="?attr/ide_text_primary"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:paddingTop="6dp"
+            android:paddingBottom="6dp"
+            android:background="@drawable/bg_pill_blue"
+            android:clickable="true"
+            android:focusable="true"/>
+    </LinearLayout>
+
+    <View
+        android:id="@+id/statusDivider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="?attr/ide_border_color"/>
+
+    <!-- ================= TABS ================= -->
+    <LinearLayout
+        android:id="@+id/tabContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="?attr/ide_bg_color"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp">
+
+        <!-- TAB 1: ERRORS -->
+        <LinearLayout
+            android:id="@+id/tabErrorWrapper"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginStart="4dp"
+            android:layout_marginEnd="4dp"
+            android:orientation="vertical"
+            android:clickable="true"
+            android:focusable="true">
+
+            <TextView
+                android:id="@+id/tabError"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Errors"
+                android:textColor="#F44336"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:clickable="false"
+                android:focusable="false"/>
+        </LinearLayout>
+
+        <!-- TAB 2: WARNINGS -->
+        <LinearLayout
+            android:id="@+id/tabWarningWrapper"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginStart="4dp"
+            android:layout_marginEnd="4dp"
+            android:orientation="vertical"
+            android:clickable="true"
+            android:focusable="true">
+
+            <TextView
+                android:id="@+id/tabWarning"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Warnings"
+                android:textColor="#FFC107"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:clickable="false"
+                android:focusable="false"/>
+        </LinearLayout>
+
+        <!-- TAB 3: BUILD LOG -->
+        <LinearLayout
+            android:id="@+id/tabLogWrapper"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginStart="4dp"
+            android:layout_marginEnd="4dp"
+            android:orientation="vertical"
+            android:clickable="true"
+            android:focusable="true">
+
+            <TextView
+                android:id="@+id/tabLog"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Build Log"
+                android:textColor="#8BC34A"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:clickable="false"
+                android:focusable="false"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="?attr/ide_border_color"/>
+
+    <!-- ================= CONTENT ================= -->
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <ScrollView
+            android:id="@+id/consoleScroll"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="15dp"
+            android:fillViewport="true">
+
+            <TextView
+                android:id="@+id/tvOutput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="?attr/ide_text_primary"
+                android:textSize="13sp"
+                android:lineSpacingExtra="3dp"
+                android:lineSpacingMultiplier="1.2"
+                android:typeface="monospace"
+                android:textIsSelectable="true"
+                android:visibility="gone"/>
+        </ScrollView>
+
+        <!-- खाली स्क्रीन -->
+        <LinearLayout
+            android:id="@+id/successLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:visibility="gone">
+
+            <ImageView
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:src="@drawable/ic_tick"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="No Errors"
+                android:textColor="?attr/ide_text_primary"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:paddingTop="8dp"/>
+        </LinearLayout>
+    </FrameLayout>
+</merge>
