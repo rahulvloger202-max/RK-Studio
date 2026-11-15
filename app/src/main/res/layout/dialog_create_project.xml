@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:layout_margin="16dp"
+	android:minWidth="340dp"
+	android:layout_gravity="center"
+	android:orientation="vertical"
+	android:background="@drawable/bg_whit_blac_theme_hard_blue_stroke_all"
+	android:padding="24dp">
+
+	<TextView
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:text="Create New Project"
+		android:textSize="20sp"
+		android:textStyle="bold"
+		android:textColor="#FFBBA9FF"
+		android:layout_marginBottom="24dp"/>
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:background="@drawable/bg_whit_blac_strok_pill"
+		android:elevation="2dp"
+		android:layout_marginBottom="16dp">
+
+		<EditText
+			android:id="@+id/inputProjectName"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:hint="Project Name (e.g. My App)"
+			android:textColor="?attr/ide_text_primary"
+			android:textColorHint="?attr/ide_text_secondary"
+			android:textSize="16sp"
+			android:paddingStart="16dp"
+			android:paddingEnd="16dp"
+			android:paddingTop="12dp"
+			android:paddingBottom="12dp"
+			android:singleLine="true"
+			android:background="@null"/>
+	</LinearLayout>
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:background="@drawable/bg_whit_blac_strok_pill"
+		android:elevation="2dp"
+		android:layout_marginBottom="30dp">
+
+		<EditText
+			android:id="@+id/inputPackageName"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:hint="Package (e.g. com.app)"
+			android:textColor="?attr/ide_text_primary"
+			android:textColorHint="?attr/ide_text_secondary"
+			android:textSize="16sp"
+			android:paddingStart="16dp"
+			android:paddingEnd="16dp"
+			android:paddingTop="12dp"
+			android:paddingBottom="12dp"
+			android:singleLine="true"
+			android:background="@null"/>
+	</LinearLayout>
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="horizontal"
+		android:gravity="end">
+
+		<TextView
+			android:id="@+id/btnCancelDialog"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="CANCEL"
+			android:textColor="#FFFF8383"
+			android:textSize="14sp"
+			android:textStyle="bold"
+			android:padding="10dp"
+			android:clickable="true"
+			android:background="?android:attr/selectableItemBackground"
+			android:layout_marginEnd="16dp"/>
+
+		<TextView
+			android:id="@+id/btnCreateDialog"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="CREATE"
+			android:textColor="#FF6DBEFF"
+			android:textSize="14sp"
+			android:textStyle="bold"
+			android:padding="10dp"
+			android:clickable="true"
+			android:background="?android:attr/selectableItemBackground"/>
+
+	</LinearLayout>
+
+</LinearLayout>
+
