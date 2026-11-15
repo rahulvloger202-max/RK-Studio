@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="ide_bg_color" format="color"/>
+    <attr name="ide_dialog_bg_color" format="color"/>
+    <attr name="ide_text_primary" format="color"/>
+    <attr name="ide_text_secondary" format="color"/>
+    <attr name="ide_icon_tint" format="color"/>
+    <attr name="ide_stroke_color" format="color"/>
+    <attr name="ide_border_color" format="color"/>
+
+    <!-- 🔥 Tab bar theme attributes (fixes ide_tab_active_bg error) -->
+    <attr name="ide_tab_active_bg" format="color"/>
+    <attr name="ide_tab_inactive_bg" format="color"/>
+    <attr name="ide_tab_active_text" format="color"/>
+    <attr name="ide_tab_inactive_text" format="color"/>
+    <attr name="ide_tab_indicator_color" format="color"/>
+
+    <!-- 🔥 Log level colors (theme-aware, replaces hardcoded green/blue/orange) -->
+    <attr name="ide_log_info_color" format="color"/>
+    <attr name="ide_log_success_color" format="color"/>
+    <attr name="ide_log_warning_color" format="color"/>
+    <attr name="ide_log_error_color" format="color"/>
+
+    <!-- Editor Theme Switching Attributes -->
+    <attr name="editor_bg_color" format="color"/>
+    <attr name="editor_plain_text_color" format="color"/>
+    <attr name="editor_active_line_color" format="color"/>
+    <attr name="editor_indent_line_color" format="color"/>
+    <attr name="editor_line_number_color" format="color"/>
+</resources>
