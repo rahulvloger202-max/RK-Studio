@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF">
+
+    <!-- 1. BASE LAYER: Pura Editor -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <!-- Toolbar / Header -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="12dp"
+            android:background="#FFFFFF"
+            android:gravity="center_vertical">
+
+            <ImageView
+                android:id="@+id/btnOpenMenu"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:src="@drawable/ic_split_screen"
+                android:background="@null"
+                android:layout_marginEnd="15dp"
+                android:tint="#212121" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvHeaderTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Current Project"
+                    android:textColor="#FF752323"
+                    android:textSize="18sp"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:id="@+id/tvProjectName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="No Project"
+                    android:textColor="#FF2B2C94"
+                    android:textSize="13sp"/>
+            </LinearLayout>
+
+            <!-- Default Actions (Run, Edit, 3-Dot Menu) -->
+            <LinearLayout
+                android:id="@+id/layoutDefaultActions"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/btnRun"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:src="@drawable/ic_run"
+                    android:tint="#212121"/>
+
+                <ImageView
+                    android:id="@+id/btnEdit"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:src="@drawable/ic_edit"
+                    android:layout_marginStart="15dp"
+                    android:tint="#212121"/>
+
+                <ImageView
+                    android:id="@+id/btnEditorMenu"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:src="@drawable/ic_more"
+                    android:layout_marginStart="15dp"
+                    android:tint="#212121"/>
+            </LinearLayout>
+
+            <!-- Typing Actions (Undo, Redo, Save) -->
+            <LinearLayout
+                android:id="@+id/layoutTypingActions"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <ImageView
+                    android:id="@+id/btnUndo"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:src="@drawable/ic_undo"/>
+
+                <ImageView
+                    android:id="@+id/btnRedo"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:src="@drawable/ic_redo"
+                    android:layout_marginStart="15dp"/>
+
+                <ImageView
+                    android:id="@+id/btnSaveApp"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:src="@drawable/ic_save"
+                    android:layout_marginStart="15dp"/>
+            </LinearLayout>
+        </LinearLayout>
+
+        <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#E0E0E0"/>
+
+        <!-- 🟢 Search Bar with System Close Icon -->
+        <LinearLayout
+            android:id="@+id/layoutSearchBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="#FFFFFF"
+            android:padding="12dp"
+            android:gravity="center_vertical"
+            android:visibility="gone"
+            android:elevation="4dp">
+
+            <EditText
+                android:id="@+id/inputEditorSearch"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:hint="Search code..."
+                android:textColor="#212121"
+                android:textColorHint="#9E9E9E"
+                android:textSize="16sp"
+                android:padding="10dp"
+                android:background="#F5F5F5"
+                android:singleLine="true"/>
+
+            <ImageView
+                android:id="@+id/btnFindNext"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:src="@drawable/ic_search"
+                android:tint="#2962FF"
+                android:layout_marginStart="15dp"
+                android:background="?android:attr/selectableItemBackground"
+                android:clickable="true"/>
+
+            <!-- ⚠️ FIX: Used standard android close icon to prevent AAPT error -->
+            <ImageView
+                android:id="@+id/btnCloseSearch"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:src="@android:drawable/ic_menu_close_clear_cancel"
+                android:tint="#D32F2F"
+                android:layout_marginStart="15dp"
+                android:background="?android:attr/selectableItemBackground"
+                android:clickable="true"/>
+        </LinearLayout>
+
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="none"
+            android:background="#FFFFFF">
+
+            <LinearLayout
+                android:id="@+id/tabContainer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"/>
+        </HorizontalScrollView>
+
+        <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#4FC3F7"/>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.primx.EditorView
+                android:id="@+id/codeCanvas"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+        </FrameLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/floatingSelectionBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top"
+        android:orientation="horizontal"
+        android:background="#FFFFFF"
+        android:elevation="6dp"
+        android:paddingTop="15dp"
+        android:paddingBottom="15dp"
+        android:visibility="gone">
+
+        <ImageView android:id="@+id/btnSelectAll" android:layout_width="0dp" android:layout_height="28dp" android:layout_weight="1" android:src="@drawable/ic_select_all" android:tint="#212121"/>
+        <ImageView android:id="@+id/btnCut" android:layout_width="0dp" android:layout_height="28dp" android:layout_weight="1" android:src="@drawable/ic_cut" android:tint="#212121"/>
+        <ImageView android:id="@+id/btnCopy" android:layout_width="0dp" android:layout_height="28dp" android:layout_weight="1" android:src="@drawable/ic_copy" android:tint="#212121"/>
+        <ImageView android:id="@+id/btnPaste" android:layout_width="0dp" android:layout_height="28dp" android:layout_weight="1" android:src="@drawable/ic_paste" android:tint="#212121"/>
+        <ImageView android:id="@+id/btnComment" android:layout_width="0dp" android:layout_height="28dp" android:layout_weight="1" android:src="@drawable/ic_comment" android:tint="#212121"/>
+    </LinearLayout>
+
+    <!-- 2. MIDDLE LAYER -->
+    <View
+        android:id="@+id/editorBlocker"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#70000000"
+        android:visibility="gone"
+        android:clickable="true"
+        android:focusable="true"/>
+
+    <!-- 3. TOP LAYER: File Explorer -->
+    <LinearLayout
+        android:id="@+id/leftPanel"
+        android:layout_width="280dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:orientation="vertical"
+        android:background="#FFFFFF"
+        android:elevation="10dp"
+        android:translationX="-300dp">
+
+        <com.primx.Filesview
+            android:id="@+id/filesViewPanel"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+</FrameLayout>
+
