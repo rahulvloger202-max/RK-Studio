@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- 1. Soft Shadow Layer (हल्की फैली हुई काली परछाई) -->
+    <item android:top="2dp" android:left="1dp" android:right="1dp" android:bottom="0dp">
+        <shape android:shape="rectangle">
+            <!-- 10% Black -->
+            <solid android:color="#1A000000" /> 
+            <corners android:radius="16dp" />
+        </shape>
+    </item>
+
+    <!-- 2. Darker Shadow Layer (गहरी काली परछाई) -->
+    <item android:top="4dp" android:left="2dp" android:right="2dp" android:bottom="1dp">
+        <shape android:shape="rectangle">
+            <!-- 20% Black -->
+            <solid android:color="#33000000" /> 
+            <corners android:radius="16dp" />
+        </shape>
+    </item>
+
+    <!-- 3. Main Box (असली डब्बा जो परछाई के ऊपर दिखेगा) -->
+    <!-- bottom="5dp" दिया है ताकि नीचे की परछाई अच्छे से दिखे -->
+    <item android:bottom="5dp">
+        <shape android:shape="rectangle">
+            <!-- आपका थीम वाला बैकग्राउंड -->
+            <solid android:color="?attr/ide_dialog_bg_color" />
+            <!-- थीम वाली स्ट्रोक/बॉर्डर - Stroke bilkul patla (1px) -->
+            <stroke android:width="1px" android:color="?attr/ide_border_color" />
+            <!-- 100dp हटाकर 16dp कर दिया, जिससे पिल शेप हट जाएगा और सिर्फ कोने गोल रहेंगे -->
+            <corners android:radius="16dp" /> 
+        </shape>
+    </item>
+
+</layer-list>
